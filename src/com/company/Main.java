@@ -6,6 +6,8 @@ public class Main {
     public static void createConwayGame(int size) {
         // It's basically a grid, there may be an initial configuration like the grid size
         String [][] conwayBoards = new String[size][size];
+        String [][] tempBoards = new String[size][size];
+
 
         // How to start the data? Do I need to start in the middle of the boards?
 
@@ -26,6 +28,19 @@ public class Main {
         for (int i = 0; i < size; i++) {
             System.out.println(Arrays.toString(conwayBoards[i]));
         }
+
+        // is the boards updated as a whole or its being checked on every cell and get updated?
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int liveCells = countLiveNeighbourCells(i, j);
+                if (liveCells < 2) tempBoards[i][j] = "dead";
+            }
+        }
+    }
+
+    public static int countLiveNeighbourCells(int i, int j) {
+        return 0;
     }
 
     public static void main(String[] args) {
