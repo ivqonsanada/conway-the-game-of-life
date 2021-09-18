@@ -3,7 +3,7 @@ package com.company;
 import java.util.Arrays;
 
 public class Main {
-    public static void createConwayGame(int size) {
+    public static void createConwayGame(int size, int generation) {
         // It's basically a grid, there may be an initial configuration like the grid size
         String [][] conwayBoards = new String[size][size];
 
@@ -30,7 +30,7 @@ public class Main {
         System.out.println();
 
         // is the boards updated as a whole or its being checked on every cell and get updated?
-        for (int k = 0; k < 3; k++) {
+        for (int k = 0; k < generation; k++) {
             String [][] tempBoards = new String[size][size];
 
             for (int i = 0; i < size; i++) {
@@ -71,6 +71,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        createConwayGame(5);
+        createConwayGame(5, 6);
     }
 }
