@@ -33,13 +33,23 @@ public class Main {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                int liveCells = countLiveNeighbourCells(i, j);
-                if (liveCells < 2) tempBoards[i][j] = "dead";
+                int liveCells = countLiveNeighbourCells(i, j, conwayBoards);
+                if (liveCells < 2 || liveCells > 3) tempBoards[i][j] = "dead";
+                else tempBoards[i][j] = "live";
             }
         }
+
+
     }
 
-    public static int countLiveNeighbourCells(int i, int j) {
+    public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
+        int counter = 0;
+        if (boards[i-1][j-1] == "live") counter++;
+        if (boards[i-1][j] == "live") counter++;
+        if (boards[i-1][j+1] == "live") counter++;
+        if (boards[i][j-1] == "live") counter++;
+        if (boards[i][j+1] == "live") counter++;
+
         return 0;
     }
 
