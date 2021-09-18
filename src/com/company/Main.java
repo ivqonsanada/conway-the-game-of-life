@@ -18,7 +18,7 @@ public class Main {
 
         for (int i = (size / 2) - 1; i < (size / 2) + 1 ; i++) {
             for (int j = (size / 2) - 1; j < (size / 2) + 1; j++) {
-                conwayBoards[i][j] = "live";
+                conwayBoards[i][j] = "O";
             }
         }
 
@@ -28,7 +28,7 @@ public class Main {
         }
 
         System.out.println();
-        
+
         // is the boards updated as a whole or its being checked on every cell and get updated?
         for (int k = 0; k < 3; k++) {
             String [][] tempBoards = new String[size][size];
@@ -50,6 +50,8 @@ public class Main {
                 System.out.println(Arrays.toString(tempBoards[i]));
             }
             System.out.println();
+
+            conwayBoards = tempBoards;
         }
     }
 
