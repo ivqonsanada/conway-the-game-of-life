@@ -16,7 +16,11 @@ public class Main {
             }
         }
 
-        
+        for (int i = (size / 2) - 1; i < (size / 2) + 1 ; i++) {
+            for (int j = (size / 2) - 1; j < (size / 2) + 1; j++) {
+                conwayBoards[i][j] = true;
+            }
+        }
 
         // Visualize the boards
         for (int i = 0; i < size; i++) {
