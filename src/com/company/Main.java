@@ -3,9 +3,9 @@ package com.company;
 import java.util.Arrays;
 
 public class Main {
-    public static void createConwayGame(int size, int generation) {
+    public static void createConwayGame(int size, int generation, int[] liveCellsLocation) {
         // It's basically a grid, there may be an initial configuration like the grid size
-        String [][] conwayBoards = new String[size][size];
+        String[][] conwayBoards = new String[size][size];
 
         // How to start the data? Do I need to start in the middle of the boards?
         // Do I need to create an array consist of random live cells?
@@ -17,7 +17,7 @@ public class Main {
             }
         }
 
-        for (int i = (size / 2) - 1; i < (size / 2) + 1 ; i++) {
+        for (int i = (size / 2) - 1; i < (size / 2) + 1; i++) {
             for (int j = (size / 2) - 1; j < (size / 2) + 1; j++) {
                 conwayBoards[i][j] = "O";
             }
@@ -32,7 +32,7 @@ public class Main {
 
         // is the boards updated as a whole or its being checked on every cell and get updated?
         for (int k = 0; k < generation; k++) {
-            String [][] tempBoards = new String[size][size];
+            String[][] tempBoards = new String[size][size];
 
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -56,6 +56,17 @@ public class Main {
         }
     }
 
+    public static int createRandomLiveCellLocations(int amount) {
+        int[][] liveCellsLocation = new int[amount][2];
+        for (int i = 0; i < amount; i++) {
+            int column = Math.random();
+            int row = Math.random();
+            liveCellsLocation[i][0] = column;
+            liveCellsLocation[i][1] = row;
+        }
+        return liveCellsLocation;
+    }
+
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
         int counter = 0;
         try {
@@ -72,6 +83,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        createConwayGame(5, 6);
+        createConwayGame(5, 6, );
     }
 }
