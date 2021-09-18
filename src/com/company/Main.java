@@ -31,7 +31,7 @@ public class Main {
 
         // is the boards updated as a whole or its being checked on every cell and get updated?
 
-        for (int i = 0; i < size; i++) {
+        for (int i = (size / 2) - 2; i < (size / 2) + 2; i++) {
             for (int j = 0; j < size; j++) {
                 int liveCells = countLiveNeighbourCells(i, j, conwayBoards);
                 if (liveCells < 2 || liveCells > 3) tempBoards[i][j] = "dead";
@@ -39,7 +39,9 @@ public class Main {
             }
         }
 
-
+        for (int i = 0; i < size; i++) {
+            System.out.println(Arrays.toString(tempBoards[i]));
+        }
     }
 
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
@@ -49,11 +51,14 @@ public class Main {
         if (boards[i-1][j+1] == "live") counter++;
         if (boards[i][j-1] == "live") counter++;
         if (boards[i][j+1] == "live") counter++;
+        if (boards[i+1][j-1] == "live") counter++;
+        if (boards[i+1][j] == "live") counter++;
+        if (boards[i+1][j+1] == "live") counter++;
 
-        return 0;
+        return counter;
     }
 
     public static void main(String[] args) {
-        createConwayGame(4);
+        createConwayGame(10);
     }
 }
