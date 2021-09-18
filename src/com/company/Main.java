@@ -3,7 +3,7 @@ package com.company;
 import java.util.Arrays;
 
 public class Main {
-    public static void createConwayGame(int size, int generation, int[] liveCellsLocation) {
+    public static void createConwayGame(int size, int generation, int[][] liveCellsLocation) {
         // It's basically a grid, there may be an initial configuration like the grid size
         String[][] conwayBoards = new String[size][size];
 
@@ -17,9 +17,11 @@ public class Main {
             }
         }
 
-        for (int i = (size / 2) - 1; i < (size / 2) + 1; i++) {
-            for (int j = (size / 2) - 1; j < (size / 2) + 1; j++) {
-                conwayBoards[i][j] = "O";
+        for (int i = 0; i < liveCellsLocation.length; i++) {
+            for (int j = 0; j < liveCellsLocation[i].length; j++) {
+                int column = liveCellsLocation[i][0];
+                int row = liveCellsLocation[i][1];
+                conwayBoards[column][row] = "O";
             }
         }
 
@@ -56,11 +58,11 @@ public class Main {
         }
     }
 
-    public static int createRandomLiveCellLocations(int amount) {
+    public static int[][] createRandomLiveCellLocations(int amount, int boardSize) {
         int[][] liveCellsLocation = new int[amount][2];
         for (int i = 0; i < amount; i++) {
-            int column = Math.random();
-            int row = Math.random();
+            int column = (int) (Math.random() * boardSize);
+            int row = (int) (Math.random() * boardSize);
             liveCellsLocation[i][0] = column;
             liveCellsLocation[i][1] = row;
         }
@@ -83,6 +85,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        createConwayGame(5, 6, );
+        int boardSize = 5;
+        int generation = 2;
+        int [][] liveCellLocations = createRandomLiveCellLocations(5, boardSize);
+
+        createConwayGame(boardSize, generation, liveCellLocations);
     }
 }
