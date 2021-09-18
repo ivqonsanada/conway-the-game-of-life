@@ -8,6 +8,7 @@ public class Main {
         String [][] conwayBoards = new String[size][size];
 
         // How to start the data? Do I need to start in the middle of the boards?
+        // Do I need to create an array consist of random live cells?
 
         // Set up the initial values for the boards
         for (int i = 0; i < size; i++) {
