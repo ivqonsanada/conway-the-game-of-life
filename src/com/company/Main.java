@@ -8,11 +8,20 @@ public class Main {
         Boolean [][] conwayBoards = new Boolean[size][size];
 
         // How to start the data? Do I need to start in the middle of the boards?
-        for (int i = 0; i < conwayBoards.length; i++) {
+
+        // Set up the initial values for the boards
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                conwayBoards[i][j] = false;
+            }
+        }
+
+        // Visualize the boards
+        for (int i = 0; i < size; i++) {
             System.out.println(Arrays.toString(conwayBoards[i]));
         }
 
-        // no progress yet
+
     }
 
     public static void main(String[] args) {
