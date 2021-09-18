@@ -71,7 +71,7 @@ public class Main {
 
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
         int counter = 0;
-        int [][] locationAroundTheCell = { {i-1, j-1}, {i-1, j}, {i-1, j+1}, {i, j-1}, {i, j+1}, {i+1, j-1}, {i+1, j}, {i+1, j+1}};
+        int [][] locationAroundTheCell = {{i-1, j-1}, {i-1, j}, {i-1, j+1}, {i, j-1}, {i, j+1}, {i+1, j-1}, {i+1, j}, {i+1, j+1}};
         for (int k = 0; k < locationAroundTheCell.length; k++) {
             int column = locationAroundTheCell[k][0];
             int row = locationAroundTheCell[k][1];
@@ -85,9 +85,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int boardSize = 5;
+        int boardSize = 20;
         int generation = 2;
-        int initialLiveCell = 5;
+        int initialLiveCell = 100;
         int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
 
         createConwayGame(boardSize, generation, liveCellLocations);
