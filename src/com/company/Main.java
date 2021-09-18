@@ -11,6 +11,8 @@ public class Main {
         for (int i = 0; i < conwayBoards.length; i++) {
             System.out.println(Arrays.toString(conwayBoards[i]));
         }
+
+        // no progress yet
     }
 
     public static void main(String[] args) {
