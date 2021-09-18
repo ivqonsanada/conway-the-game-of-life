@@ -32,7 +32,7 @@ public class Main {
 
         System.out.println();
 
-        // is the boards updated as a whole or its being checked on every cell and get updated?
+        // is the board updated as a whole or its being checked on every cell and get updated?
         for (int k = 0; k < generation; k++) {
             String[][] tempBoards = new String[size][size];
 
@@ -71,23 +71,24 @@ public class Main {
 
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
         int counter = 0;
-        try {
-            if (boards[i-1][j-1] == "O") counter++;
-            if (boards[i-1][j] == "O") counter++;
-            if (boards[i-1][j+1] == "O") counter++;
-            if (boards[i][j-1] == "O") counter++;
-            if (boards[i][j+1] == "O") counter++;
-            if (boards[i+1][j-1] == "O") counter++;
-            if (boards[i+1][j] == "O") counter++;
-            if (boards[i+1][j+1] == "O") counter++;
-        } catch (Exception e) {}
+        int [][] locationAroundTheCell = { {i-1, j-1}, {i-1, j}, {i-1, j+1}, {i, j-1}, {i, j+1}, {i+1, j-1}, {i+1, j}, {i+1, j+1}};
+        for (int k = 0; k < locationAroundTheCell.length; k++) {
+            int column = locationAroundTheCell[k][0];
+            int row = locationAroundTheCell[k][1];
+            try {
+                if (boards[column][row] == "O") counter++;
+            } catch (Exception e) {
+
+            }
+        }
         return counter;
     }
 
     public static void main(String[] args) {
         int boardSize = 5;
         int generation = 2;
-        int [][] liveCellLocations = createRandomLiveCellLocations(5, boardSize);
+        int initialLiveCell = 5;
+        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
 
         createConwayGame(boardSize, generation, liveCellLocations);
     }
