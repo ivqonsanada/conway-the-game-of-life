@@ -8,7 +8,6 @@ public class Main {
         String [][] conwayBoards = new String[size][size];
         String [][] tempBoards = new String[size][size];
 
-
         // How to start the data? Do I need to start in the middle of the boards?
 
         // Set up the initial values for the boards
@@ -29,36 +28,42 @@ public class Main {
             System.out.println(Arrays.toString(conwayBoards[i]));
         }
 
+        System.out.println();
+
+
+
         // is the boards updated as a whole or its being checked on every cell and get updated?
-
-        for (int i = (size / 2) - 2; i < (size / 2) + 2; i++) {
-            for (int j = 0; j < size; j++) {
-                int liveCells = countLiveNeighbourCells(i, j, conwayBoards);
-                if (liveCells < 2 || liveCells > 3) tempBoards[i][j] = "dead";
-                else tempBoards[i][j] = "live";
+        for (int k = 0; k < 3; k++) {
+            for (int i = (size / 2) - 2; i < (size / 2) + 2; i++) {
+                for (int j = 0; j < size; j++) {
+                    int liveCells = countLiveNeighbourCells(i, j, conwayBoards);
+                    if (liveCells < 2 || liveCells > 3) tempBoards[i][j] = "dead";
+                    else tempBoards[i][j] = "live";
+                }
             }
-        }
-
-        for (int i = 0; i < size; i++) {
-            System.out.println(Arrays.toString(tempBoards[i]));
+            for (int i = 0; i < size; i++) {
+                System.out.println(Arrays.toString(tempBoards[i]));
+            }
+            System.out.println();
         }
     }
 
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
         int counter = 0;
-        if (boards[i-1][j-1] == "live") counter++;
-        if (boards[i-1][j] == "live") counter++;
-        if (boards[i-1][j+1] == "live") counter++;
-        if (boards[i][j-1] == "live") counter++;
-        if (boards[i][j+1] == "live") counter++;
-        if (boards[i+1][j-1] == "live") counter++;
-        if (boards[i+1][j] == "live") counter++;
-        if (boards[i+1][j+1] == "live") counter++;
-
+        try {
+            if (boards[i-1][j-1] == "live") counter++;
+            if (boards[i-1][j] == "live") counter++;
+            if (boards[i-1][j+1] == "live") counter++;
+            if (boards[i][j-1] == "live") counter++;
+            if (boards[i][j+1] == "live") counter++;
+            if (boards[i+1][j-1] == "live") counter++;
+            if (boards[i+1][j] == "live") counter++;
+            if (boards[i+1][j+1] == "live") counter++;
+        } catch (Exception e) {}
         return counter;
     }
 
     public static void main(String[] args) {
-        createConwayGame(10);
+        createConwayGame(5);
     }
 }
