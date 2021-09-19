@@ -93,16 +93,16 @@ public class Main {
     public static void main(String[] args) {
 //
 //        // find out about java Graphics 2D
-        int boardSize = 5;
+        int boardSize = 20;
         int generation = 2;
-        int initialLiveCell = 10;
+        int initialLiveCell = 15;
         int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
 //
 //        createConwayGame(boardSize, generation, liveCellLocations);
 
         Board conwayBoard = new Board(boardSize, generation, liveCellLocations);
 
-        conwayBoard.setSize(475,475);
+        conwayBoard.setSize(400,400);
         conwayBoard.setVisible(true);
         conwayBoard.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
