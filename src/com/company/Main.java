@@ -16,9 +16,10 @@ public class Main {
         return liveCellsLocation;
     }
 
-    public static int[][] createLiveCellPattern(String type) {
+    public static int[][] createLiveCellPattern(String type, int boardSize) {
+        int middleBoard = boardSize / 2;
         if (type == "Glider") {
-            int [][] patternCoordinates = {{0,1}, {1,2}, {2,0}, {2,1}, {2,2}};
+            int [][] patternCoordinates = {{middleBoard,middleBoard+1}, {middleBoard+1,middleBoard+2}, {middleBoard+2,middleBoard}, {middleBoard+2,middleBoard+1}, {middleBoard+2,middleBoard+2}};
             return patternCoordinates;
         }
 
@@ -34,7 +35,7 @@ public class Main {
         int boardSize = 50;
         int initialLiveCell = 50;
 //        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
-        int [][] liveCellLocations = createLiveCellPattern("Block");
+        int [][] liveCellLocations = createLiveCellPattern("Glider", boardSize);
 
         Board conwayBoard = new Board(boardSize, liveCellLocations);
 

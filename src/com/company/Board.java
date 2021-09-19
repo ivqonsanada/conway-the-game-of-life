@@ -44,7 +44,11 @@ public class Board extends JFrame {
                     for (int i = 0; i < size; i++) {
                         for (int j = 0; j < size; j++) {
                             int liveCells = countLiveNeighbourCells(i, j, label);
-                            if (liveCells < 2 || liveCells > 3) label2[i][j].setBackground(Color.WHITE);
+                            Boolean isCurrentCellAlive = label[i][j].getBackground() == Color.BLACK;
+                            if (isCurrentCellAlive && (liveCells < 2)) label2[i][j].setBackground(Color.WHITE);
+                            if (isCurrentCellAlive && (liveCells > 1 && liveCells < 4)) label2[i][j].setBackground(Color.WHITE);
+                            if (isCurrentCellAlive && (liveCells > 1 && liveCells < 4)) label2[i][j].setBackground(Color.WHITE);
+
                             else label2[i][j].setBackground(Color.BLACK);
                         }
                     }
