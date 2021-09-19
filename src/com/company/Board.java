@@ -7,7 +7,9 @@ public class Board extends JFrame {
     JLabel[][] label;
 
     public Board(int size, int generation, int[][] liveCellsLocation) {
-        JPanel panel = new JPanel(new GridLayout(size,size));
+        JPanel panel = new JPanel(new GridLayout(size, size));
+        JPanel panel2 = new JPanel(new GridLayout(size, size));
+
         label = new JLabel[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -15,6 +17,7 @@ public class Board extends JFrame {
                 label[i][j].setOpaque(true);
                 label[i][j].setBackground(Color.WHITE);
                 panel.add(label[i][j]);
+                panel2.add(label[i][j]);
             }
         }
 
