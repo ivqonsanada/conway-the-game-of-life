@@ -10,7 +10,7 @@ public class Board extends JFrame {
     JLabel[][] label;
     JLabel[][] label2;
 
-    public Board(int size, int[][] liveCellsLocation) {
+    public Board(int size, int[][] liveCellCoordinates) {
         JPanel panel = new JPanel(new GridLayout(size, size));
         JPanel panel2 = new JPanel(new GridLayout(size, size));
 
@@ -20,18 +20,11 @@ public class Board extends JFrame {
         setDefaultPanelConfiguration(panel, label);
         setDefaultPanelConfiguration(panel2, label2);
 
-        for (int[] ints : liveCellsLocation) {
-            for (int j = 0; j < ints.length; j++) {
-                int column = ints[0];
-                int row = ints[1];
-                label[column][row].setBackground(Color.BLACK);
-            }
-
-            for (int j = 0; j < ints.length; j++) {
-                int column = ints[0];
-                int row = ints[1];
-                label2[column][row].setBackground(Color.BLACK);
-            }
+        for (int[] coordinate : liveCellCoordinates) {
+            int y = coordinate[0];
+            int x = coordinate[1];
+            label[y][x].setBackground(Color.BLACK);
+            label2[y][x].setBackground(Color.BLACK);
         }
 
         add(panel, BorderLayout.CENTER);
@@ -92,16 +85,16 @@ public class Board extends JFrame {
 
     public static int countLiveNeighbourCells(int i, int j, JLabel[][] boards) {
         int counter = 0;
-        int [][] locationAroundTheCell = {
+        int [][] neighbourCoordinates = {
                 {i-1, j-1}, {i-1, j}, {i-1, j+1},
                 {i,   j-1}, /* [] */  {i,   j+1},
                 {i+1, j-1}, {i+1, j}, {i+1, j+1}
         };
-        for (int[] ints : locationAroundTheCell) {
-            int column = ints[0];
-            int row = ints[1];
+        for (int[] coordinate : neighbourCoordinates) {
+            int x = coordinate[1];
+            int y = coordinate[0];
             try {
-                if (boards[column][row].getBackground() == Color.BLACK) counter++;
+                if (boards[y][x].getBackground() == Color.BLACK) counter++;
             } catch (Exception ignored) {
 
             }

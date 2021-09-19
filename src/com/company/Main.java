@@ -24,7 +24,7 @@ public class Main {
         }
 
         if (type == "Block") {
-            int [][] patternCoordinates = {{1,1}, {1,2}, {2,1}, {2,2}};
+            int [][] patternCoordinates = {{middleBoard+1,middleBoard+1}, {middleBoard+1,middleBoard+2}, {middleBoard+2,middleBoard+1}, {middleBoard+2,middleBoard+2}};
             return patternCoordinates;
         }
 
