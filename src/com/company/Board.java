@@ -10,7 +10,7 @@ public class Board extends JFrame {
     JLabel[][] label;
     JLabel[][] label2;
 
-    public Board(int size, int generation, int[][] liveCellsLocation) {
+    public Board(int size, int[][] liveCellsLocation) {
         JPanel panel = new JPanel(new GridLayout(size, size));
         JPanel panel2 = new JPanel(new GridLayout(size, size));
 
@@ -37,18 +37,24 @@ public class Board extends JFrame {
                 int row = ints[1];
                 label[column][row].setBackground(Color.BLACK);
             }
+
+            for (int j = 0; j < ints.length; j++) {
+                int column = ints[0];
+                int row = ints[1];
+                label2[column][row].setBackground(Color.BLACK);
+            }
         }
 
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
-                    for (int i = 0; i < size; i++) {
-                        for (int j = 0; j < size; j++) {
-                            if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
-                            else label2[i][j].setBackground(Color.WHITE);
-                        }
-                    }
+//                    for (int i = 0; i < size; i++) {
+//                        for (int j = 0; j < size; j++) {
+//                            if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
+//                            else label2[i][j].setBackground(Color.WHITE);
+//                        }
+//                    }
 
                     // just realize this method only check the middle board, it was because I only try to avoid array out of bound exception
                     for (int i = 0; i < size; i++) {
@@ -62,12 +68,12 @@ public class Board extends JFrame {
                     remove(panel);
                     add(panel2, BorderLayout.CENTER);
                 } else {
-                    for (int i = 0; i < size; i++) {
-                        for (int j = 0; j < size; j++) {
-                            if (label2[i][j].getBackground() == Color.BLACK) label[i][j].setBackground(Color.BLACK);
-                            else label[i][j].setBackground(Color.WHITE);
-                        }
-                    }
+//                    for (int i = 0; i < size; i++) {
+//                        for (int j = 0; j < size; j++) {
+//                            if (label2[i][j].getBackground() == Color.BLACK) label[i][j].setBackground(Color.BLACK);
+//                            else label[i][j].setBackground(Color.WHITE);
+//                        }
+//                    }
 
                     for (int i = 0; i < size; i++) {
                         for (int j = 0; j < size; j++) {

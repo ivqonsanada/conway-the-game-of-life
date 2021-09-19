@@ -94,13 +94,12 @@ public class Main {
 //
 //        // find out about java Graphics 2D
         int boardSize = 20;
-        int generation = 2;
         int initialLiveCell = 20;
         int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
 //
 //        createConwayGame(boardSize, generation, liveCellLocations);
 
-        Board conwayBoard = new Board(boardSize, generation, liveCellLocations);
+        Board conwayBoard = new Board(boardSize, liveCellLocations);
 
         conwayBoard.setSize(400,400);
         conwayBoard.setVisible(true);
