@@ -1,19 +1,18 @@
 package com.company;
 
 import javax.swing.*;
-import java.util.Arrays;
 
 public class Main {
-    public static int[][] createRandomLiveCellLocations(int amount, int boardSize) {
-        int[][] liveCellsLocation = new int[amount][2];
+    public static int[][] createRandomLiveCellCoordinates(int amount, int boardSize) {
+        int[][] liveCellCoordinates = new int[amount][2];
         for (int i = 0; i < amount; i++) {
-            int column = (int) (Math.random() * boardSize);
-            int row = (int) (Math.random() * boardSize);
-            liveCellsLocation[i][0] = column;
-            liveCellsLocation[i][1] = row;
+            int y = (int) (Math.random() * boardSize);
+            int x = (int) (Math.random() * boardSize);
+            liveCellCoordinates[i][0] = y;
+            liveCellCoordinates[i][1] = x;
         }
 
-        return liveCellsLocation;
+        return liveCellCoordinates;
     }
 
     public static int[][] createLiveCellPattern(String type, int boardSize) {
@@ -34,10 +33,10 @@ public class Main {
     public static void main(String[] args) {
         int boardSize = 24;
         int initialLiveCell = 10;
-        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
-//        int [][] liveCellLocations = createLiveCellPattern("Glider", boardSize);
+//        int [][] liveCellCoordinates = createRandomLiveCellLocations(initialLiveCell, boardSize);
+        int [][] liveCellCoordinates = createLiveCellPattern("Glider", boardSize);
 
-        Board conwayBoard = new Board(boardSize, liveCellLocations);
+        Board conwayBoard = new Board(boardSize, liveCellCoordinates);
 
         conwayBoard.setSize(400,400);
         conwayBoard.setVisible(true);
