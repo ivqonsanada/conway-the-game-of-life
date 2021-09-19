@@ -31,8 +31,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int boardSize = 24;
-        int initialLiveCell = 10;
+        int boardSize = 100;
+        int initialLiveCell = (int) (0.3 * (boardSize * boardSize));
         int [][] liveCellCoordinates = generateRandomLiveCellCoordinates(initialLiveCell, boardSize);
 //        int [][] liveCellCoordinates = generateLiveCellPattern("Glider", boardSize);
 
