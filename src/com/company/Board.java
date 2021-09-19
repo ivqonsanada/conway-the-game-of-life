@@ -10,7 +10,7 @@ public class Board extends JFrame {
     public Board(int size, int[][] liveCellCoordinates) {
         JPanel firstPanel = new JPanel(new GridLayout(size, size));
         JPanel secondPanel = new JPanel(new GridLayout(size, size));
-        
+
         JLabel[][] label = new JLabel[size][size];
         JLabel[][] label2 = new JLabel[size][size];
 
@@ -94,6 +94,7 @@ public class Board extends JFrame {
                 if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[y][x].setBackground(Color.WHITE);
                 else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[y][x].setBackground(Color.BLACK);
                 else if (isCurrentCellAlive) label2[y][x].setBackground(Color.BLACK);
+                else label2[y][x].setBackground(Color.WHITE);
             }
         }
     }
