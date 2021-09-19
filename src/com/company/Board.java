@@ -40,7 +40,7 @@ public class Board extends JFrame {
             }
         }
 
-        Timer timer = new Timer(3000, new ActionListener() {
+        Timer timer = new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
@@ -51,6 +51,7 @@ public class Board extends JFrame {
                         }
                     }
 
+                    // just realize this method only check the middle board, it was because I only try to avoid array out of bound exception
                     for (int i = 0; i < size; i++) {
                         for (int j = 0; j < size; j++) {
                             int liveCells = countLiveNeighbourCells(i, j, label);
@@ -82,6 +83,7 @@ public class Board extends JFrame {
                 }
 
                 revalidate();
+                repaint();
             }
         });
 
