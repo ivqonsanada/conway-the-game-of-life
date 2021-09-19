@@ -5,10 +5,12 @@ import java.awt.*;
 import javax.swing.Timer;
 
 public class Board extends JFrame {
+    boolean isLabel = true;
+
     public Board(int size, int[][] liveCellCoordinates) {
         JPanel firstPanel = new JPanel(new GridLayout(size, size));
         JPanel secondPanel = new JPanel(new GridLayout(size, size));
-
+        
         JLabel[][] label = new JLabel[size][size];
         JLabel[][] label2 = new JLabel[size][size];
 
@@ -25,36 +27,40 @@ public class Board extends JFrame {
         add(firstPanel, BorderLayout.CENTER);
 
         Timer timer = new Timer(2000, event -> {
-            if (firstPanel.isDisplayable()) {
-                for (int y = 0; y < size; y++) {
-                    for (int x = 0; x < size; x++) {
-                        boolean isCurrentCellAlive = label[y][x].getBackground() == Color.BLACK;
-                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label);
-                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[y][x].setBackground(Color.WHITE);
-                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[y][x].setBackground(Color.BLACK);
-                        else if (isCurrentCellAlive) label2[y][x].setBackground(Color.BLACK);
-                    }
-                }
+//            if (firstPanel.isDisplayable()) {
 
-                remove(firstPanel);
-                add(secondPanel, BorderLayout.CENTER);
-            } else if (secondPanel.isShowing()) {
-                for (int y = 0; y < size; y++) {
-                    for (int x = 0; x < size; x++) {
-                        boolean isCurrentCellAlive = label2[y][x].getBackground() == Color.BLACK;
-                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label2);
-                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[y][x].setBackground(Color.WHITE);
-                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[y][x].setBackground(Color.BLACK);
-                        else if (isCurrentCellAlive) label[y][x].setBackground(Color.BLACK);
-                    }
-                }
+            if (isLabel) generateNextGeneration(label, label2);
+            else generateNextGeneration(label2, label);
 
-                remove(secondPanel);
-                add(firstPanel, BorderLayout.CENTER);
-            }
+            firstPanel.removeAll();
 
-            revalidate();
-            repaint();
+            if (isLabel) insertLabel(firstPanel, label2);
+            else insertLabel(firstPanel, label);
+
+            firstPanel.revalidate();
+            firstPanel.repaint();
+
+            isLabel = !isLabel;
+
+//                remove(firstPanel);
+//                add(secondPanel, BorderLayout.CENTER);
+//            } else if (secondPanel.isShowing()) {
+//                for (int y = 0; y < size; y++) {
+//                    for (int x = 0; x < size; x++) {
+//                        boolean isCurrentCellAlive = label2[y][x].getBackground() == Color.BLACK;
+//                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label2);
+//                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[y][x].setBackground(Color.WHITE);
+//                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[y][x].setBackground(Color.BLACK);
+//                        else if (isCurrentCellAlive) label[y][x].setBackground(Color.BLACK);
+//                    }
+//                }
+//
+//                remove(secondPanel);
+//                add(firstPanel, BorderLayout.CENTER);
+//            }
+
+//            revalidate();
+//            repaint();
         });
 
         timer.setRepeats(true);
@@ -68,6 +74,26 @@ public class Board extends JFrame {
                 label[y][x].setOpaque(true);
                 label[y][x].setBackground(color);
                 panel.add(label[y][x]);
+            }
+        }
+    }
+
+    public static void insertLabel(JPanel panel, JLabel[][] label) {
+        for (int y = 0; y < label.length; y++) {
+            for (int x = 0; x < label.length; x++) {
+                panel.add(label[y][x]);
+            }
+        }
+    }
+
+    public static void generateNextGeneration(JLabel[][] label, JLabel[][] label2) {
+        for (int y = 0; y < label.length; y++) {
+            for (int x = 0; x < label.length; x++) {
+                boolean isCurrentCellAlive = label[y][x].getBackground() == Color.BLACK;
+                int liveNeighbourCells = countLiveNeighbourCells(y, x, label);
+                if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[y][x].setBackground(Color.WHITE);
+                else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[y][x].setBackground(Color.BLACK);
+                else if (isCurrentCellAlive) label2[y][x].setBackground(Color.BLACK);
             }
         }
     }
