@@ -40,31 +40,47 @@ public class Board extends JFrame {
             }
         }
 
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
-                        else label2[i][j].setBackground(Color.WHITE);
-                    }
-                }
-
-                for (int i = (size / 2) - 2; i < (size / 2) + 2; i++) {
-                    for (int j = 0; j < size; j++) {
-                        int liveCells = countLiveNeighbourCells(i, j, label);
-                        if (liveCells < 2 || liveCells > 3) label2[i][j].setBackground(Color.WHITE);
-                        else label2[i][j].setBackground(Color.BLACK);
-                    }
-                }
-
                 if (panel.isShowing()) {
+                    for (int i = 0; i < size; i++) {
+                        for (int j = 0; j < size; j++) {
+                            if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
+                            else label2[i][j].setBackground(Color.WHITE);
+                        }
+                    }
+
+                    for (int i = 0; i < size; i++) {
+                        for (int j = 0; j < size; j++) {
+                            int liveCells = countLiveNeighbourCells(i, j, label);
+                            if (liveCells < 2 || liveCells > 3) label2[i][j].setBackground(Color.WHITE);
+                            else label2[i][j].setBackground(Color.BLACK);
+                        }
+                    }
+
                     remove(panel);
                     add(panel2, BorderLayout.CENTER);
                 } else {
+                    for (int i = 0; i < size; i++) {
+                        for (int j = 0; j < size; j++) {
+                            if (label2[i][j].getBackground() == Color.BLACK) label[i][j].setBackground(Color.BLACK);
+                            else label[i][j].setBackground(Color.WHITE);
+                        }
+                    }
+
+                    for (int i = 0; i < size; i++) {
+                        for (int j = 0; j < size; j++) {
+                            int liveCells = countLiveNeighbourCells(i, j, label2);
+                            if (liveCells < 2 || liveCells > 3) label[i][j].setBackground(Color.WHITE);
+                            else label[i][j].setBackground(Color.BLACK);
+                        }
+                    }
+
                     remove(panel2);
                     add(panel, BorderLayout.CENTER);
                 }
+
                 revalidate();
             }
         });
