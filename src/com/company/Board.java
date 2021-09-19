@@ -28,4 +28,23 @@ public class Board extends JFrame {
 
         add(panel, BorderLayout.CENTER);
     }
+
+    public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
+        int counter = 0;
+        int [][] locationAroundTheCell = {
+                {i-1, j-1}, {i-1, j}, {i-1, j+1},
+                {i,   j-1}, /* [] */  {i,   j+1},
+                {i+1, j-1}, {i+1, j}, {i+1, j+1}
+        };
+        for (int k = 0; k < locationAroundTheCell.length; k++) {
+            int column = locationAroundTheCell[k][0];
+            int row = locationAroundTheCell[k][1];
+            try {
+                if (boards[column][row] == "O") counter++;
+            } catch (Exception e) {
+
+            }
+        }
+        return counter;
+    }
 }
