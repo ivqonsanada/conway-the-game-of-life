@@ -16,10 +16,24 @@ public class Main {
         return liveCellsLocation;
     }
 
+    public static int[][] createLiveCellPattern(String type) {
+        if (type == "Glider") {
+            int [][] patternCoordinates = {{0,1}, {1,2}, {2,0}, {2,1}, {2,2}};
+            return patternCoordinates;
+        }
+
+        if (type == "Block") {
+
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
         int boardSize = 50;
         int initialLiveCell = 50;
-        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
+//        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
+        int [][] liveCellLocations = createLiveCellPattern("Glider");
 
         Board conwayBoard = new Board(boardSize, liveCellLocations);
 

@@ -36,7 +36,7 @@ public class Board extends JFrame {
 
         add(panel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(100, new ActionListener() {
+        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
