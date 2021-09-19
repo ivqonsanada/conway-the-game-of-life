@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.Timer;
 
 public class Board extends JFrame {
@@ -15,6 +16,8 @@ public class Board extends JFrame {
         JPanel panel2 = new JPanel(new GridLayout(size, size));
 
         label = new JLabel[size][size];
+        label2 = new JLabel[size][size];
+
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 label[i][j] = new JLabel();
@@ -40,9 +43,23 @@ public class Board extends JFrame {
         Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                
+                for (int i = 0; i < size; i++) {
+                    for (int j = 0; j < size; j++) {
+                        label2[i][j] = label[i][j];
+                    }
+                }
 
-                repaint();
+                for (int i = (size / 2) - 2; i < (size / 2) + 2; i++) {
+                    for (int j = 0; j < size; j++) {
+                        int liveCells = countLiveNeighbourCells(i, j, label);
+                        if (liveCells < 2 || liveCells > 3) label2[i][j].setBackground(Color.WHITE);
+                        else label2[i][j].setBackground(Color.BLACK);
+                    }
+                }
+
+                remove(panel);
+                add(panel2, BorderLayout.CENTER);
+                revalidate();
             }
         });
         timer.setRepeats(true);
@@ -63,7 +80,7 @@ public class Board extends JFrame {
 //        revalidate();
     }
 
-    public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
+    public static int countLiveNeighbourCells(int i, int j, JLabel[][] boards) {
         int counter = 0;
         int [][] locationAroundTheCell = {
                 {i-1, j-1}, {i-1, j}, {i-1, j+1},
@@ -74,7 +91,7 @@ public class Board extends JFrame {
             int column = locationAroundTheCell[k][0];
             int row = locationAroundTheCell[k][1];
             try {
-                if (boards[column][row] == "O") counter++;
+                if (boards[column][row].getBackground() == Color.BLACK) counter++;
             } catch (Exception e) {
 
             }
