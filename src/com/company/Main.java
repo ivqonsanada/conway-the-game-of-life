@@ -32,8 +32,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int boardSize = 50;
-        int initialLiveCell = 50;
+        int boardSize = 24;
+        int initialLiveCell = 5;
 //        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
         int [][] liveCellLocations = createLiveCellPattern("Glider", boardSize);
 

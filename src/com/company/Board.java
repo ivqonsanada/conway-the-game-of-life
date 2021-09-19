@@ -2,23 +2,18 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Board extends JFrame {
-    JLabel[][] label;
-    JLabel[][] label2;
-
     public Board(int size, int[][] liveCellCoordinates) {
-        JPanel panel = new JPanel(new GridLayout(size, size));
-        JPanel panel2 = new JPanel(new GridLayout(size, size));
+        JPanel firstPanel = new JPanel(new GridLayout(size, size));
+        JPanel secondPanel = new JPanel(new GridLayout(size, size));
 
-        label = new JLabel[size][size];
-        label2 = new JLabel[size][size];
+        JLabel[][] label = new JLabel[size][size];
+        JLabel[][] label2 = new JLabel[size][size];
 
-        setDefaultPanelConfiguration(panel, label);
-        setDefaultPanelConfiguration(panel2, label2);
+        setDefaultPanelConfiguration(firstPanel, label);
+        setDefaultPanelConfiguration(secondPanel, label2);
 
         for (int[] coordinate : liveCellCoordinates) {
             int y = coordinate[0];
@@ -27,41 +22,40 @@ public class Board extends JFrame {
             label2[y][x].setBackground(Color.BLACK);
         }
 
-        add(panel, BorderLayout.CENTER);
+        add(firstPanel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (panel.isShowing()) {
-                    // just realize this method only check the middle board, it was because I only try to avoid array out of bound exception
-                    for (int i = 0; i < size; i++) {
-                        for (int j = 0; j < size; j++) {
-                            Boolean isCurrentCellAlive = label[i][j].getBackground() == Color.BLACK;
-                            int liveNeighbourCells = countLiveNeighbourCells(i, j, label);
-                            if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[i][j].setBackground(Color.WHITE);
-                            if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[i][j].setBackground(Color.BLACK);
-                        }
+        Timer timer = new Timer(100, event -> {
+            if (firstPanel.isShowing()) {
+                for (int i = 0; i < size; i++) {
+                    for (int j = 0; j < size; j++) {
+                        boolean isCurrentCellAlive = label[i][j].getBackground() == Color.BLACK;
+                        int liveNeighbourCells = countLiveNeighbourCells(i, j, label);
+                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[i][j].setBackground(Color.WHITE);
+                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[i][j].setBackground(Color.BLACK);
+                        else if (isCurrentCellAlive && (liveNeighbourCells == 2 || liveNeighbourCells == 3)) label2[i][j].setBackground(Color.BLACK);
                     }
-
-                    remove(panel);
-                    add(panel2, BorderLayout.CENTER);
-                } else if (panel2.isShowing()) {
-                    for (int i = 0; i < size; i++) {
-                        for (int j = 0; j < size; j++) {
-                            int liveCells = countLiveNeighbourCells(i, j, label2);
-                            Boolean isCurrentCellAlive = label2[i][j].getBackground() == Color.BLACK;
-                            if (isCurrentCellAlive && (liveCells < 2 || liveCells > 3)) label[i][j].setBackground(Color.WHITE);
-                            if (!isCurrentCellAlive && liveCells == 3) label[i][j].setBackground(Color.BLACK);
-                        }
-                    }
-
-                    remove(panel2);
-                    add(panel, BorderLayout.CENTER);
                 }
 
-                revalidate();
-                repaint();
+                remove(firstPanel);
+                add(secondPanel, BorderLayout.CENTER);
+            } else if (secondPanel.isShowing()) {
+                for (int i = 0; i < size; i++) {
+                    for (int j = 0; j < size; j++) {
+                        boolean isCurrentCellAlive = label2[i][j].getBackground() == Color.BLACK;
+                        System.out.println(isCurrentCellAlive);
+                        int liveNeighbourCells = countLiveNeighbourCells(i, j, label2);
+                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[i][j].setBackground(Color.WHITE);
+                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[i][j].setBackground(Color.BLACK);
+                        else if (isCurrentCellAlive && (liveNeighbourCells == 2 || liveNeighbourCells == 3)) label[i][j].setBackground(Color.BLACK);
+                    }
+                }
+
+                remove(secondPanel);
+                add(firstPanel, BorderLayout.CENTER);
             }
+
+            revalidate();
+            repaint();
         });
 
         timer.setRepeats(true);
@@ -83,7 +77,7 @@ public class Board extends JFrame {
         setPanelLabelBg(panel, label, Color.WHITE);
     }
 
-    public static int countLiveNeighbourCells(int i, int j, JLabel[][] boards) {
+    public static int countLiveNeighbourCells(int i, int j, JLabel[][] label) {
         int counter = 0;
         int [][] neighbourCoordinates = {
                 {i-1, j-1}, {i-1, j}, {i-1, j+1},
@@ -94,7 +88,7 @@ public class Board extends JFrame {
             int x = coordinate[1];
             int y = coordinate[0];
             try {
-                if (boards[y][x].getBackground() == Color.BLACK) counter++;
+                if (label[y][x].getBackground() == Color.BLACK) counter++;
             } catch (Exception ignored) {
 
             }
