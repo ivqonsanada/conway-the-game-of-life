@@ -2,6 +2,9 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class Board extends JFrame {
     JLabel[][] label;
@@ -34,14 +37,26 @@ public class Board extends JFrame {
             }
         }
 
+        Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                
+
+                repaint();
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+
+
         add(panel, BorderLayout.CENTER);
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                label[i][j].setOpaque(true);
-                label[i][j].setBackground(Color.WHITE);
-            }
-        }
+//        for (int i = 0; i < size; i++) {
+//            for (int j = 0; j < size; j++) {
+//                label[i][j].setOpaque(true);
+//                label[i][j].setBackground(Color.WHITE);
+//            }
+//        }
 
 //        remove(panel);
 //        add(panel2, BorderLayout.CENTER);
