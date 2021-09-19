@@ -100,7 +100,7 @@ public class Main {
 //
 //        createConwayGame(boardSize, generation, liveCellLocations);
 
-        Grid application = new Grid();
+        Board application = new Board();
         application.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
 }
