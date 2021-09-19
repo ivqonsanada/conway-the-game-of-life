@@ -6,24 +6,26 @@ import java.awt.*;
 public class Board extends JFrame {
     JLabel[][] label;
 
-    public Board() {
-        JPanel panel = new JPanel(new GridLayout(8,8));
-        label = new JLabel[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+    public Board(int size, int generation, int[][] liveCellsLocation) {
+        JPanel panel = new JPanel(new GridLayout(size,size));
+        label = new JLabel[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 label[i][j] = new JLabel();
                 label[i][j].setOpaque(true);
+                label[i][j].setBackground(Color.WHITE);
                 panel.add(label[i][j]);
             }
         }
+
+        for (int i = 0; i < liveCellsLocation.length; i++) {
+            for (int j = 0; j < liveCellsLocation[i].length; j++) {
+                int column = liveCellsLocation[i][0];
+                int row = liveCellsLocation[i][1];
+                label[column][row].setBackground(Color.BLACK);
+            }
+        }
+
         add(panel, BorderLayout.CENTER);
     }
-
-    public void paint(Graphics g) {
-        for (int x = 30; x <= 300; x += 30)
-            for (int y = 30; y <= 300; y += 30)
-                g.drawRect(x, y, 30, 30);
-
-    }
-
 }
