@@ -26,27 +26,26 @@ public class Board extends JFrame {
 
         Timer timer = new Timer(100, event -> {
             if (firstPanel.isShowing()) {
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        boolean isCurrentCellAlive = label[i][j].getBackground() == Color.BLACK;
-                        int liveNeighbourCells = countLiveNeighbourCells(i, j, label);
-                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[i][j].setBackground(Color.WHITE);
-                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[i][j].setBackground(Color.BLACK);
-                        else if (isCurrentCellAlive && (liveNeighbourCells == 2 || liveNeighbourCells == 3)) label2[i][j].setBackground(Color.BLACK);
+                for (int y = 0; y < size; y++) {
+                    for (int x = 0; x < size; x++) {
+                        boolean isCurrentCellAlive = label[y][x].getBackground() == Color.BLACK;
+                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label);
+                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label2[y][x].setBackground(Color.WHITE);
+                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label2[y][x].setBackground(Color.BLACK);
+                        else if (isCurrentCellAlive) label2[y][x].setBackground(Color.BLACK);
                     }
                 }
 
                 remove(firstPanel);
                 add(secondPanel, BorderLayout.CENTER);
             } else if (secondPanel.isShowing()) {
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        boolean isCurrentCellAlive = label2[i][j].getBackground() == Color.BLACK;
-                        System.out.println(isCurrentCellAlive);
-                        int liveNeighbourCells = countLiveNeighbourCells(i, j, label2);
-                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[i][j].setBackground(Color.WHITE);
-                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[i][j].setBackground(Color.BLACK);
-                        else if (isCurrentCellAlive && (liveNeighbourCells == 2 || liveNeighbourCells == 3)) label[i][j].setBackground(Color.BLACK);
+                for (int y = 0; y < size; y++) {
+                    for (int x = 0; x < size; x++) {
+                        boolean isCurrentCellAlive = label2[y][x].getBackground() == Color.BLACK;
+                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label2);
+                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[y][x].setBackground(Color.WHITE);
+                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[y][x].setBackground(Color.BLACK);
+                        else if (isCurrentCellAlive) label[y][x].setBackground(Color.BLACK);
                     }
                 }
 
@@ -63,12 +62,12 @@ public class Board extends JFrame {
     }
 
     public static void setPanelLabelBg(JPanel panel, JLabel[][] label, Color color) {
-        for (int i = 0; i < label.length; i++) {
-            for (int j = 0; j < label.length; j++) {
-                label[i][j] = new JLabel();
-                label[i][j].setOpaque(true);
-                label[i][j].setBackground(color);
-                panel.add(label[i][j]);
+        for (int y = 0; y < label.length; y++) {
+            for (int x = 0; x < label.length; x++) {
+                label[y][x] = new JLabel();
+                label[y][x].setOpaque(true);
+                label[y][x].setBackground(color);
+                panel.add(label[y][x]);
             }
         }
     }
@@ -77,18 +76,18 @@ public class Board extends JFrame {
         setPanelLabelBg(panel, label, Color.WHITE);
     }
 
-    public static int countLiveNeighbourCells(int i, int j, JLabel[][] label) {
+    public static int countLiveNeighbourCells(int y, int x, JLabel[][] label) {
         int counter = 0;
         int [][] neighbourCoordinates = {
-                {i-1, j-1}, {i-1, j}, {i-1, j+1},
-                {i,   j-1}, /* [] */  {i,   j+1},
-                {i+1, j-1}, {i+1, j}, {i+1, j+1}
+                {y-1, x-1}, {y-1, x}, {y-1, x+1},
+                {y,   x-1}, /* [] */  {y,   x+1},
+                {y+1, x-1}, {y+1, x}, {y+1, x+1}
         };
         for (int[] coordinate : neighbourCoordinates) {
-            int x = coordinate[1];
-            int y = coordinate[0];
+            int X = coordinate[1];
+            int Y = coordinate[0];
             try {
-                if (label[y][x].getBackground() == Color.BLACK) counter++;
+                if (label[Y][X].getBackground() == Color.BLACK) counter++;
             } catch (Exception ignored) {
 
             }

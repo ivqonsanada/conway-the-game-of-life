@@ -33,9 +33,9 @@ public class Main {
 
     public static void main(String[] args) {
         int boardSize = 24;
-        int initialLiveCell = 5;
-//        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
-        int [][] liveCellLocations = createLiveCellPattern("Glider", boardSize);
+        int initialLiveCell = 10;
+        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
+//        int [][] liveCellLocations = createLiveCellPattern("Glider", boardSize);
 
         Board conwayBoard = new Board(boardSize, liveCellLocations);
 
