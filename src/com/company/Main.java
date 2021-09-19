@@ -2,7 +2,28 @@ package com.company;
 
 import java.util.Arrays;
 
+import java.lang.Math.*;
+import java.applet.*;
+import java.util.*;
+import java.io.*;
+import java.text.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.Color;
+import java.awt.font.*;
+import java.awt.image.*;
+import java.awt.geom.*;
+import java.net.URL;
+
 public class Main {
+    // Create graphics screen ....
+
+    SimpleScreen canvas = new SimpleScreen();
+       canvas.setBackground( Color.white );
+
     public static void createConwayGame(int size, int generation, int[][] liveCellsLocation) {
         // It's basically a grid, there may be an initial configuration like the grid size
         String[][] conwayBoards = new String[size][size];
