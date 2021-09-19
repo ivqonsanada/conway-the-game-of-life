@@ -26,9 +26,7 @@ public class Board extends JFrame {
 
         add(firstPanel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(2000, event -> {
-//            if (firstPanel.isDisplayable()) {
-
+        Timer timer = new Timer(100, event -> {
             if (isLabel) generateNextGeneration(label, label2);
             else generateNextGeneration(label2, label);
 
@@ -41,26 +39,6 @@ public class Board extends JFrame {
             firstPanel.repaint();
 
             isLabel = !isLabel;
-
-//                remove(firstPanel);
-//                add(secondPanel, BorderLayout.CENTER);
-//            } else if (secondPanel.isShowing()) {
-//                for (int y = 0; y < size; y++) {
-//                    for (int x = 0; x < size; x++) {
-//                        boolean isCurrentCellAlive = label2[y][x].getBackground() == Color.BLACK;
-//                        int liveNeighbourCells = countLiveNeighbourCells(y, x, label2);
-//                        if (isCurrentCellAlive && (liveNeighbourCells < 2 || liveNeighbourCells > 3)) label[y][x].setBackground(Color.WHITE);
-//                        else if (!isCurrentCellAlive && liveNeighbourCells == 3) label[y][x].setBackground(Color.BLACK);
-//                        else if (isCurrentCellAlive) label[y][x].setBackground(Color.BLACK);
-//                    }
-//                }
-//
-//                remove(secondPanel);
-//                add(firstPanel, BorderLayout.CENTER);
-//            }
-
-//            revalidate();
-//            repaint();
         });
 
         timer.setRepeats(true);

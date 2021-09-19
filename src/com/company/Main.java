@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.*;
 
 public class Main {
-    public static int[][] createRandomLiveCellCoordinates(int amount, int boardSize) {
+    public static int[][] generateRandomLiveCellCoordinates(int amount, int boardSize) {
         int[][] liveCellCoordinates = new int[amount][2];
         for (int i = 0; i < amount; i++) {
             int y = (int) (Math.random() * boardSize);
@@ -15,7 +15,7 @@ public class Main {
         return liveCellCoordinates;
     }
 
-    public static int[][] createLiveCellPattern(String type, int boardSize) {
+    public static int[][] generateLiveCellPattern(String type, int boardSize) {
         int middleBoard = boardSize / 2;
         if (type == "Glider") {
             int [][] patternCoordinates = {{middleBoard,middleBoard+1}, {middleBoard+1,middleBoard+2}, {middleBoard+2,middleBoard}, {middleBoard+2,middleBoard+1}, {middleBoard+2,middleBoard+2}};
@@ -33,8 +33,8 @@ public class Main {
     public static void main(String[] args) {
         int boardSize = 24;
         int initialLiveCell = 10;
-//        int [][] liveCellCoordinates = createRandomLiveCellLocations(initialLiveCell, boardSize);
-        int [][] liveCellCoordinates = createLiveCellPattern("Glider", boardSize);
+        int [][] liveCellCoordinates = generateRandomLiveCellCoordinates(initialLiveCell, boardSize);
+//        int [][] liveCellCoordinates = generateLiveCellPattern("Glider", boardSize);
 
         Board conwayBoard = new Board(boardSize, liveCellCoordinates);
 
