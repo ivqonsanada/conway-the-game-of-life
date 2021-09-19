@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Board extends JFrame {
     JLabel[][] label;
+    JLabel[][] label2;
 
     public Board(int size, int generation, int[][] liveCellsLocation) {
         JPanel panel = new JPanel(new GridLayout(size, size));
@@ -17,7 +18,11 @@ public class Board extends JFrame {
                 label[i][j].setOpaque(true);
                 label[i][j].setBackground(Color.WHITE);
                 panel.add(label[i][j]);
-                panel2.add(label[i][j]);
+
+                label2[i][j] = new JLabel();
+                label2[i][j].setOpaque(true);
+                label2[i][j].setBackground(Color.WHITE);
+                panel2.add(label2[i][j]);
             }
         }
 
@@ -30,6 +35,17 @@ public class Board extends JFrame {
         }
 
         add(panel, BorderLayout.CENTER);
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                label[i][j].setOpaque(true);
+                label[i][j].setBackground(Color.WHITE);
+            }
+        }
+
+//        remove(panel);
+//        add(panel2, BorderLayout.CENTER);
+//        revalidate();
     }
 
     public static int countLiveNeighbourCells(int i, int j, String[][] boards) {
