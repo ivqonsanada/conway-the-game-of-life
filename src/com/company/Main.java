@@ -93,8 +93,8 @@ public class Main {
     public static void main(String[] args) {
 //
 //        // find out about java Graphics 2D
-        int boardSize = 20;
-        int initialLiveCell = 20;
+        int boardSize = 100;
+        int initialLiveCell = 100;
         int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
 //
 //        createConwayGame(boardSize, generation, liveCellLocations);

@@ -45,17 +45,10 @@ public class Board extends JFrame {
             }
         }
 
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
-//                    for (int i = 0; i < size; i++) {
-//                        for (int j = 0; j < size; j++) {
-//                            if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
-//                            else label2[i][j].setBackground(Color.WHITE);
-//                        }
-//                    }
-
                     // just realize this method only check the middle board, it was because I only try to avoid array out of bound exception
                     for (int i = 0; i < size; i++) {
                         for (int j = 0; j < size; j++) {
@@ -68,13 +61,6 @@ public class Board extends JFrame {
                     remove(panel);
                     add(panel2, BorderLayout.CENTER);
                 } else {
-//                    for (int i = 0; i < size; i++) {
-//                        for (int j = 0; j < size; j++) {
-//                            if (label2[i][j].getBackground() == Color.BLACK) label[i][j].setBackground(Color.BLACK);
-//                            else label[i][j].setBackground(Color.WHITE);
-//                        }
-//                    }
-
                     for (int i = 0; i < size; i++) {
                         for (int j = 0; j < size; j++) {
                             int liveCells = countLiveNeighbourCells(i, j, label2);
