@@ -45,7 +45,9 @@ public class Board extends JFrame {
             }
         }
 
-        Timer timer = new Timer(50, new ActionListener() {
+        add(panel, BorderLayout.CENTER);
+
+        Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
@@ -77,8 +79,6 @@ public class Board extends JFrame {
                 repaint();
             }
         });
-
-        add(panel, BorderLayout.CENTER);
 
         timer.setRepeats(true);
         timer.start();
