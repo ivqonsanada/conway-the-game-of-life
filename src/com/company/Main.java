@@ -90,6 +90,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
+        // find out about java Graphics 2D
         int boardSize = 5;
         int generation = 2;
         int initialLiveCell = 10;
