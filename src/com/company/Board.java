@@ -40,7 +40,7 @@ public class Board extends JFrame {
             }
         }
 
-        Timer timer = new Timer(2000, new ActionListener() {
+        Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 for (int i = 0; i < size; i++) {
