@@ -23,7 +23,8 @@ public class Main {
         }
 
         if (type == "Block") {
-
+            int [][] patternCoordinates = {{1,1}, {1,2}, {2,1}, {2,2}};
+            return patternCoordinates;
         }
 
         return null;
@@ -33,7 +34,7 @@ public class Main {
         int boardSize = 50;
         int initialLiveCell = 50;
 //        int [][] liveCellLocations = createRandomLiveCellLocations(initialLiveCell, boardSize);
-        int [][] liveCellLocations = createLiveCellPattern("Glider");
+        int [][] liveCellLocations = createLiveCellPattern("Block");
 
         Board conwayBoard = new Board(boardSize, liveCellLocations);
 
