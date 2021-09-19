@@ -17,19 +17,8 @@ public class Board extends JFrame {
         label = new JLabel[size][size];
         label2 = new JLabel[size][size];
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                label[i][j] = new JLabel();
-                label[i][j].setOpaque(true);
-                label[i][j].setBackground(Color.WHITE);
-                panel.add(label[i][j]);
-
-                label2[i][j] = new JLabel();
-                label2[i][j].setOpaque(true);
-                label2[i][j].setBackground(Color.WHITE);
-                panel2.add(label2[i][j]);
-            }
-        }
+        setDefaultPanelConfiguration(panel, label);
+        setDefaultPanelConfiguration(panel2, label2);
 
         for (int[] ints : liveCellsLocation) {
             for (int j = 0; j < ints.length; j++) {
@@ -47,7 +36,7 @@ public class Board extends JFrame {
 
         add(panel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(2000, new ActionListener() {
+        Timer timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (panel.isShowing()) {
@@ -82,6 +71,21 @@ public class Board extends JFrame {
 
         timer.setRepeats(true);
         timer.start();
+    }
+
+    public static void setPanelLabelBg(JPanel panel, JLabel[][] label) {
+        for (int i = 0; i < label.length; i++) {
+            for (int j = 0; j < label.length; j++) {
+                label[i][j] = new JLabel();
+                label[i][j].setOpaque(true);
+                label[i][j].setBackground(Color.WHITE);
+                panel.add(label[i][j]);
+            }
+        }
+    }
+
+    public static void setDefaultPanelConfiguration(JPanel panel, JLabel[][] label) {
+        setPanelLabelBg(panel, label);
     }
 
     public static int countLiveNeighbourCells(int i, int j, JLabel[][] boards) {
