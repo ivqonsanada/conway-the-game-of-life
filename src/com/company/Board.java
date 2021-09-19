@@ -12,8 +12,8 @@ public class Board extends JFrame {
         JLabel[][] label = new JLabel[size][size];
         JLabel[][] label2 = new JLabel[size][size];
 
-        setDefaultPanelConfiguration(firstPanel, label);
-        setDefaultPanelConfiguration(secondPanel, label2);
+        setDefaultPanelConfig(firstPanel, label);
+        setDefaultPanelConfig(secondPanel, label2);
 
         for (int[] coordinate : liveCellCoordinates) {
             int y = coordinate[0];
@@ -24,8 +24,8 @@ public class Board extends JFrame {
 
         add(firstPanel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(100, event -> {
-            if (firstPanel.isShowing()) {
+        Timer timer = new Timer(2000, event -> {
+            if (firstPanel.isDisplayable()) {
                 for (int y = 0; y < size; y++) {
                     for (int x = 0; x < size; x++) {
                         boolean isCurrentCellAlive = label[y][x].getBackground() == Color.BLACK;
@@ -72,7 +72,7 @@ public class Board extends JFrame {
         }
     }
 
-    public static void setDefaultPanelConfiguration(JPanel panel, JLabel[][] label) {
+    public static void setDefaultPanelConfig(JPanel panel, JLabel[][] label) {
         setPanelLabelBg(panel, label, Color.WHITE);
     }
 
