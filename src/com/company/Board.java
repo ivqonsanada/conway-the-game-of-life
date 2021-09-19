@@ -45,7 +45,8 @@ public class Board extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 for (int i = 0; i < size; i++) {
                     for (int j = 0; j < size; j++) {
-                        label2[i][j] = label[i][j];
+                        if (label[i][j].getBackground() == Color.BLACK) label2[i][j].setBackground(Color.BLACK);
+                        else label2[i][j].setBackground(Color.WHITE);
                     }
                 }
 
@@ -57,16 +58,23 @@ public class Board extends JFrame {
                     }
                 }
 
-                remove(panel);
-                add(panel2, BorderLayout.CENTER);
+                if (panel.isShowing()) {
+                    remove(panel);
+                    add(panel2, BorderLayout.CENTER);
+                } else {
+                    remove(panel2);
+                    add(panel, BorderLayout.CENTER);
+                }
                 revalidate();
             }
         });
+
+        add(panel, BorderLayout.CENTER);
+
         timer.setRepeats(true);
         timer.start();
 
 
-        add(panel, BorderLayout.CENTER);
 
 //        for (int i = 0; i < size; i++) {
 //            for (int j = 0; j < size; j++) {
